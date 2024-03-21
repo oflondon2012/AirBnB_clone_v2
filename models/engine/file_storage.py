@@ -44,11 +44,11 @@ class FileStorage:
         with open(self.__file_path, 'w', encoding="UTF-8") as f:
             json.dump(temp, f)
 
-     def delete(self, obj=None):
-         """ delete an existing element"""
-         if obj:
-             key = "{}.{}".format(type(obj).__name__, obj.id)
-             del self.__objects[key]
+    def delete(self, obj=None):
+        """ delete an existing element"""
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            del self.__objects[key]
 
     def reload(self):
         """Loads storage dictionary from file"""
@@ -59,7 +59,7 @@ class FileStorage:
                     self.__objects()[key] = val
         except FileNotFoundError:
             pass
-    
+
     def close(self):
         """calls reload()"""
         self.reload()
