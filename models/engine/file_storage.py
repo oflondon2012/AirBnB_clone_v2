@@ -52,9 +52,11 @@ class FileStorage:
         """Loads storage dictionary from file"""
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
-                for key, val in (json.load(f)).items():
-                    val = eval(value["__class__"])(**val)
-                    self.__objects()[key] = val
+                data = json.load(f)
+                for key, val in data.items():
+                    obj_cls = val["__class__"]
+                    obj = eval(obj_cls)(**val)
+                    self.__objects[key] = obj
         except FileNotFoundError:
             pass
 
