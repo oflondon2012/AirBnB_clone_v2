@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ fabric script that generates a .tgz archive."""
 import os
 from datetime import datetime
@@ -8,10 +8,15 @@ from fabric.api import *
 def do_pack():
     """ fabric script that generates a .tgz archive."""
     nowtime = datetime.now()
-    archi = 'web_static_' + nowtime.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
-    local('mkdir -p versions')
-    cfile = local('tar -cvzf versions/{} web_static'.format(archi))
-    if cfile is not None:
-        return archi
-    else:
-        return None
+    tstr = nowtime.strftime("%Y%m%d%H%M%S")
+    archi = 'web_static_' + tstr + '.' + 'tgz'
+
+    local('sudo mkdir -p versions')
+    try:
+        local(f'sudo tar -cvzf versions/archi web_static')
+        d_path = f"versions/web_static_{tstr}.tgz"
+        path_size = os.path.getsize(d_path)
+        print(f"web_static packed: {d_path} -> {path_size}Bytes"
+    except Exception:
+        archi = None
+    return archi
