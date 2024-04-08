@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Fabric script to genereate tgz archive
-execute: fab -f 1-pack_web_static.py do_pack
+script to genereate tgz archive
 """
 
 from datetime import datetime
@@ -10,14 +9,14 @@ from fabric.api import *
 
 def do_pack():
     """
-    making an archive on web_static folder
+    scrit to generate tgz archive
     """
 
-    time = datetime.now()
-    archive = 'web_static_' + time.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
+    t = datetime.now()
+    archi = 'web_static_' + t.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
     local('mkdir -p versions')
-    create = local('tar -cvzf versions/{} web_static'.format(archive))
-    if create is not None:
-        return archive
+    dmake = local('tar -cvzf versions/{} web_static'.format(archi))
+    if dmake is not None:
+        return archi
     else:
         return None
