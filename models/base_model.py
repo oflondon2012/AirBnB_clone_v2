@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 import models
 from sqlalchemy import Column, Integer, String, DateTime
+from os import getenv
 
 Base = declarative_base()
 

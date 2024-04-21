@@ -35,7 +35,7 @@ class DBStorage:
         """return a dict of an object"""
         adict = {}
         if cls:
-            if type(cls) is str:
+            if isinstance(cls, str):
                 cls = eval(cls)
             query = self.__session.query(cls)
             for lin in query:
